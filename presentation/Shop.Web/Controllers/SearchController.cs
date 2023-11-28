@@ -5,7 +5,6 @@ namespace Shop.Web.Controllers
 {
     public class SearchController : Controller
     {
-
         private readonly BookService bookService;
 
         public SearchController(BookService bookService)

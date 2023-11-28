@@ -6,9 +6,12 @@ namespace ShopMemory
     {
         private readonly Book[] books = new[]
         {
-            new Book (1, "ISBN 11111-11111", "D.Knuth",  "Art of programming"),
-            new Book (2, "ISBN 22222-22222", "M.Fowler",  "Refactoring"),
-            new Book (3, "ISBN 33333-33333", "B.Kernighan, D.Ritchi", "C programming language")
+            new Book (1, "ISBN 11111-11111", "D.Knuth",  "Art of programming", 
+                "This volume begins with basic concept and technology", 7.19m),
+            new Book (2, "ISBN 22222-22222", "M.Fowler",  "Refactoring", "As the " +
+                "application of object technology--particulary Java...", 12.45m),
+            new Book (3, "ISBN 33333-33333", "B.Kernighan, D.Ritchi", "C programming language", 
+                "Known as the bible of C, this classic bestseller introduce ...", 14.98m)
 
         };
 
@@ -21,6 +24,11 @@ namespace ShopMemory
         {
             return books.Where(book => book.Author.Contains(titlePart) 
             || book.Title.Contains(titlePart)).ToArray();
+        }
+
+        public Book GetById(int id)
+        {
+            return books.Single(book => book.Id == id);
         }
     }
 }
