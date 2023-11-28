@@ -1,12 +1,27 @@
-﻿@model IEnumerable<BookShop.Book>
+﻿@model Book[]  //IEnumerable<BookShop.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Результаты поиска";
 }
 
-<h1>Index</h1>
+<h1>Результаты поиска</h1>
 
-<p>
+@if (Model.Length == 0)
+{
+    <p>Ничего не найдено.</p>
+}
+else
+{
+        <ul>
+            @foreach(var book in Model)
+        {
+            <li><a href="@Url.Action("Index", "Book", new {id = book.Id})">@book.Title</a></li>
+        }
+    </ul>
+}
+
+
+@* <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
@@ -38,4 +53,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
