@@ -27,5 +27,10 @@ namespace BookShop.Tests
         {
             throw new NotImplementedException();
         }
+
+        public Book[] GetAllByIds(IEnumerable<int> bookids)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
