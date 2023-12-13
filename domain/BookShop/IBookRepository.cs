@@ -14,6 +14,6 @@ namespace BookShop
         
         Book GetById(int id);
 
-        
+        Book[] GetAllByIds(IEnumerable<int> bookIds);
     }
 }
