@@ -68,15 +68,15 @@ namespace Shop.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult RemoveItem(int id)
+        public IActionResult RemoveItem(int bookId)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
 
+            order.RemoveItem(bookId);
 
-            order.RemoveItem(id);
             SaveOrderAndCart(order, cart);
 
-            return RedirectToAction("Index", "Book", new { id });
+            return RedirectToAction("Index", "Order");
         }
 
         [HttpPost]
