@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,12 +18,12 @@ namespace BookShop
             get { return items; }
         }
 
-        public int TotalCount
+        public int TotalCount    // =>  items.Sum(item => item.Count);
         {
             get { return items.Sum(item => item.Count); }
         }
 
-        public decimal TotalPrice
+        public decimal TotalPrice   // => items.Sum(item => item.Price * item.Count);
         {
             get { return items.Sum(item => item.Price * item.Count); }
         }
@@ -38,24 +39,59 @@ namespace BookShop
             this.items = new List<OrderItem>(items);
         }
 
-        public void AddItem(Book book, int count)
+        public OrderItem GetItem(int bookID)
+        {
+            int index = items.FindIndex(item => item.BookId == bookID);
+
+            if (index == -1)
+            {
+                ThrowBookException("Book not found", bookID);
+            }
+
+            return items[index];
+        }
+
+        public void AddOrUpdateItem(Book book, int count)
         {
             if(book == null)
             {
                 throw new ArgumentNullException(nameof(book));
             }
 
-            var item = items.SingleOrDefault(x => x.BookId == book.Id);
+            int index = items.FindIndex(item => item.BookId == book.Id);
 
-            if (item == null)
+            if (index == -1)
             {
                 items.Add(new OrderItem(book.Id, count, book.Price));
             }
             else
             {
-                items.Remove(item);
-                items.Add(new OrderItem(book.Id, item.Count + count, book.Price));  
+                items[index].Count += count;
             }
+        }
+
+       public void RemoveItem(int bookId)
+        {
+
+            int index = items.FindIndex(item => item.BookId == bookId);
+
+            if (index == -1)
+            {
+                ThrowBookException("Order dosn't contains specified item.", bookId);
+            }
+
+            items.RemoveAt(index);
+        }
+
+        private void ThrowBookException(string message, int bookId)
+        {
+            var exception = new InvalidOperationException(message);
+
+            exception.Data["Id"] = bookId;
+            //exception.Data[nameof(book.Id)] = book.Title;
+            //exception.Data[nameof(book.Id)] = book.Author;
+
+            throw exception;
         }
     }
 }
