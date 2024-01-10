@@ -41,6 +41,31 @@ namespace BookShop.Contractors
 
         public string Title => "Доставка через постаматы";
 
+        public OrderDelivery GetDelivery (Form form)
+        {
+            if (form.UniqueCode != UniqueCode || !form.IsFinal)
+            {
+                throw new InvalidOperationException("Invalid Form.");
+            }
+
+            var cityId = form.Fields.Single(field => field.Name == "city").Value;
+            var cityName = cities[cityId];
+            var postamateId = form.Fields.Single(field => field.Name == "postamate").Value;
+            var postamateName = postamates[cityId][postamateId];
+
+            var parameters = new Dictionary<string, string>
+            {
+                {nameof(cityId), cityId},
+                {nameof(cityName), cityName},
+                {nameof(postamateId), postamateId},
+                {nameof(postamateName), postamateName},
+            };
+
+            var description = $"Город: {cityName}\nПостамат: {postamateName}";
+
+            return new OrderDelivery(UniqueCode, description, 150m, parameters);
+        }
+
         Form IDeliveryService.CreateForm(Order order)
         {
             if (order == null)
@@ -52,7 +77,7 @@ namespace BookShop.Contractors
             });
         }
 
-        Form IDeliveryService.MoveNext(int orderId, int step, IReadOnlyDictionary<string, string> values)
+        Form IDeliveryService.MoveNextForm(int orderId, int step, IReadOnlyDictionary<string, string> values)
         {
             if (step == 1)
             {
