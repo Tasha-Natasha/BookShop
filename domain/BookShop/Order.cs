@@ -18,6 +18,12 @@ namespace BookShop
             get { return items; }
         }
 
+        public string CellPhone { get; set; }
+
+        public OrderDelivery Delivery { get; set; }
+
+        public OrderPayment Payment { get; set; }
+
         public int TotalCount    // =>  items.Sum(item => item.Count);
         {
             get { return items.Sum(item => item.Count); }
@@ -25,7 +31,8 @@ namespace BookShop
 
         public decimal TotalPrice   // => items.Sum(item => item.Price * item.Count);
         {
-            get { return items.Sum(item => item.Price * item.Count); }
+            get { return items.Sum(item => (item.Price * item.Count) 
+                    + (Delivery?.Amount ?? 0m)); }
         }
 
         public Order(int id, IEnumerable<OrderItem> items)

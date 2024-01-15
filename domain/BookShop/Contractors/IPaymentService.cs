@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookShop.Contractors
 {
-    public interface IDeliveryService
+    public interface IPaymentService
     {
         string UniqueCode { get; }
 
@@ -14,8 +14,9 @@ namespace BookShop.Contractors
 
         Form CreateForm (Order order);
 
-        Form MoveNextForm(int orderId, int step, IReadOnlyDictionary<string, string> Value);
+        Form MoveNextForm(int orderId, int step, 
+            IReadOnlyDictionary<string, string> Value);
 
-        OrderDelivery GetDelivery(Form form);
+        OrderPayment GetPayment(Form form);
     }
 }

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\domain\BookShop\BookShop.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ShopMemory\ShopMemory.csproj" />
+    <ProjectReference Include="..\..\plugins\Shop.YandexKassa\Shop.YandexKassa.csproj" />
   </ItemGroup>
 
 </Project>
