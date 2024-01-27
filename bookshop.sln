@@ -24,6 +24,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Web.Contractor", "presentation\Shop.Web.Contractor\Shop.Web.Contractor.csproj", "{A98D5232-52C6-431F-B610-A1F64ACDF6BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{9C8871C4-3CDE-4029-A4DB-1075122DC52B}"
+	ProjectSection(SolutionItems) = preProject
+		presentation\Shop.Web\Models\Cart.cs = presentation\Shop.Web\Models\Cart.cs
+		presentation\Shop.Web\Models\OrderItemModel.cs = presentation\Shop.Web\Models\OrderItemModel.cs
+		presentation\Shop.Web\Models\OrderModel.cs = presentation\Shop.Web\Models\OrderModel.cs
+		presentation\Shop.Web\SessionExtensions.cs = presentation\Shop.Web\SessionExtensions.cs
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Web.App", "appication\Shop.Web.App\Shop.Web.App.csproj", "{744FB62A-B17E-4EBE-90FA-3B2E9C4DD081}"
 EndProject

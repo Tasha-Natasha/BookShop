@@ -2,21 +2,17 @@
 {
     public class Cart
     {
-        //public IDictionary<int, int> Items { get; set; }    = new Dictionary<int, int>();   
-
-        //public decimal Amount { get; set; } 
-
         public int OrderId { get; }
 
-        public int TotalCount { get; set; }
+        public int TotalCount { get; }
 
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get; }
 
-        public Cart(int orderId)
+        public Cart(int orderId, int totalCount, decimal totalPrice)
         {
             OrderId = orderId;
-            TotalCount = 0;
-            TotalPrice = 0m;
+            TotalCount = totalCount;
+            TotalPrice = totalPrice;
         }
 
 
