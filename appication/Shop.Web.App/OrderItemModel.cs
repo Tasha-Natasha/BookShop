@@ -1,4 +1,5 @@
-﻿namespace Shop.Web.Models
+﻿namespace Shop.Web.App
+
 {
     public class OrderItemModel
     {
@@ -8,7 +9,7 @@
 
         public string Author { get; set; }
 
-        public string Count { get; set; }
+        public int Count { get; set; }
 
         public decimal Price { get; set; }   
     }
