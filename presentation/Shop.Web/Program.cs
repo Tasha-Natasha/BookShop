@@ -4,6 +4,7 @@ using BookShop.Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+using Shop.Web.App;
 using Shop.Web.Contractor;
 using Shop.YandexKassa;
 using ShopMemory;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -29,6 +31,7 @@ builder.Services.AddSingleton<IPaymentService, CashPaymentService>();
 builder.Services.AddSingleton<IPaymentService, YandexKassaPaymentService>();
 builder.Services.AddSingleton<IWebContractorService, YandexKassaPaymentService>();
 builder.Services.AddSingleton<BookService>();
+builder.Services.AddSingleton<OrderService>();
 
 var app = builder.Build();
 
@@ -50,12 +53,19 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapAreaControllerRoute(
-    name: "yandex.kassa",
-    areaName: "YandexKassa",
-    pattern: "YandexKassa/{controller=Home}/{action=Index}/{id?}");
+
+
+//app.MapAreaControllerRoute(
+//    name: "yandex.kassa",
+//    areaName: "YandexKassa",
+//    pattern: "YandexKassa/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

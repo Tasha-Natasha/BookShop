@@ -1,8 +1,7 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Shop.Web.Models;
+﻿using Microsoft.AspNetCore.Http;
 using System.Text;
 
-namespace Shop.Web
+namespace Shop.Web.App
 {
     public static class SessionExtensions
     {

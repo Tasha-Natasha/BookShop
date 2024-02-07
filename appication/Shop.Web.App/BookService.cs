@@ -1,11 +1,12 @@
-﻿using Shop.Web.App;
+﻿using BookShop;
+using Shop.Web.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShop
+namespace Shop.Web.App
 {
     public class BookService
     {

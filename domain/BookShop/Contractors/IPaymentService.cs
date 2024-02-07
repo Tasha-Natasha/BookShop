@@ -8,13 +8,13 @@ namespace BookShop.Contractors
 {
     public interface IPaymentService
     {
-        string UniqueCode { get; }
+        string Name { get; }
 
         string Title { get; }
 
-        Form CreateForm (Order order);
+        Form FirstForm (Order order);
 
-        Form MoveNextForm(int orderId, int step, 
+        Form NextForm(int step, 
             IReadOnlyDictionary<string, string> Value);
 
         OrderPayment GetPayment(Form form);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.YandexKassa.Areas.YandexKassa.Models;
 
 namespace Shop.YandexKassa.Areas.YandexKassa.Controllers
 {
@@ -6,16 +7,26 @@ namespace Shop.YandexKassa.Areas.YandexKassa.Controllers
     public class HomeController : Controller
     {
         
-        public IActionResult Index()
+        public IActionResult Index(int orderId, string returnUri)
         {
-            return View();
+            var model = new ExampleModel
+            {
+                OrderId = orderId,
+                ReturnUri = returnUri,
+            };
+
+            return View(model);
         }
 
-        
-        //  /Yandex.Kassa/Home/Callback
-        public IActionResult Callback()
+        public IActionResult Callback(int orderId, string returnUri)
         {
-            return View();
+            var model = new ExampleModel
+            {
+                OrderId = orderId,
+                ReturnUri = returnUri,
+            };
+
+            return View(model);
         }
     }
 }

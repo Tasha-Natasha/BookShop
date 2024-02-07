@@ -1,4 +1,5 @@
-﻿@* @using Shop.YandexKassa.Areas.YandexKassa.Controllers *@
+﻿@using Shop.YandexKassa.Areas.YandexKassa.Controllers
+@using Shop.YandexKassa.Areas.YandexKassa.Models
 
 @{
     ViewData["Title"] = "Яндекс.Касса";
@@ -10,5 +11,12 @@
 <p>
     <a href="/YandexKassa/Home/Callback">Оплатить</a>
 
-    @* <a href="@Url.Action("Callback", "Home")">Оплатить</a> *@
+    Здесь мы эмулируем редирект на внешнюю службу оплаты Яндекс.Касса. В исходном коде
+    проекта можно посмотреть, как передаются параметры.
 </p>
+
+<form action="@Url.Action(nameof(HomeController.Callback),"Home",new{area="YandexKassa"})"method="post">
+    <input type="hidden" name="orderId" value="@Model.OrderId" />
+    <input type="hidden" name="returnUri" value="@Model.ReturnUri" />
+    <button type="submit" class="btn btn-success">Оплатить</button>
+</form>
