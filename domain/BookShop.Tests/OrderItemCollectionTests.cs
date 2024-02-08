@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using BookShop.Data;
 
 namespace BookShop.Tests
 {
@@ -12,40 +13,31 @@ namespace BookShop.Tests
         [Fact]
         public void Get_WithExcistingItem_ReturnItem()
         {
-            var order = new Order(1, new[]
-            {
-                new OrderItem(1, 3, 10m),
-                new OrderItem(2 ,5, 100m),
-            });
+            var order = CreateTestOrder();
 
             var orderItem = order.Items.Get(1);
 
             Assert.Equal(3, orderItem.Count);
         }
 
-        [Fact]
-        public void Get_WithNonExcistingItem_ThrowsInvalidOperationException()
+        private static Order CreateTestOrder()
         {
-            var order = new Order(1, new[]
+            return new Order(new OrderDto
             {
-                new OrderItem(1, 3, 10m),
-                new OrderItem(2 ,5, 100m),
-            });
+                Id = 1,
+                Items = new List<OrderItemDto>
+                {
+                    new OrderItemDto { BookId = 1, Price = 10m, Count = 3},
+                    new OrderItemDto { BookId = 2, Price = 100m, Count = 5},
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                order.Items.Get(100);
+                }
             });
         }
 
         [Fact]
-        public void Add_WithExistingItem_ThrowInvalidOperationException()
+        public void Get_WithNonExcistingItem_ThrowsInvalidOperationException()
         {
-            var order = new Order(1, new[]
-            {
-                new OrderItem(1, 3, 10m),
-                new OrderItem(2, 5, 100m),
-            });
+            var order = CreateTestOrder();
 
             Assert.Throws<InvalidOperationException>(() =>
             {
@@ -56,11 +48,7 @@ namespace BookShop.Tests
         [Fact]
         public void Add_WithNewItem_SetsCount()
         {
-            var order = new Order(1, new[]
-            {
-                new OrderItem(1, 3, 10m),
-                new OrderItem(2, 5, 100m),
-            });
+            var order = CreateTestOrder();
 
             order.Items.Add(4, 10, 30m);
 
@@ -70,11 +58,7 @@ namespace BookShop.Tests
         [Fact]
         public void Remove_WithExcistingItem_Removetem()
         {
-            var order = new Order(1, new[]
-            {
-                new OrderItem(1, 3, 10m),
-                new OrderItem(2 ,5, 100m),
-            });
+            var order = CreateTestOrder();
 
             order.Items.Remove(1);
 
@@ -85,11 +69,7 @@ namespace BookShop.Tests
         [Fact]
         public void Remove_WithNonExcistingItem_ThrowsInvalidOperationException()
         {
-            var order = new Order(1, new[]
-            {
-                new OrderItem(1, 3, 10m),
-                new OrderItem(2 ,5, 100m),
-            });
+            var order = CreateTestOrder();
 
             Assert.Throws<InvalidOperationException>(() =>
             {

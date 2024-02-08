@@ -7,7 +7,6 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Shop.Web.App;
 using Shop.Web.Contractor;
 using Shop.YandexKassa;
-using ShopMemory;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,8 +22,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddSingleton<IBookRepository, BookRepository>();
-builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+
 builder.Services.AddSingleton<INotificationService, DebugNotificationService>();
 builder.Services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
 builder.Services.AddSingleton<IPaymentService, CashPaymentService>();
@@ -61,11 +59,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
-
-//app.MapAreaControllerRoute(
-//    name: "yandex.kassa",
-//    areaName: "YandexKassa",
-//    pattern: "YandexKassa/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
